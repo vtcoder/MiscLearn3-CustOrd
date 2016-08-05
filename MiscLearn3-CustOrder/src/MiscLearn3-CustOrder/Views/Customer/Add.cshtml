@@ -1,0 +1,12 @@
+﻿@model CustomerViewModel
+
+<h2>Add New Customer</h2>
+
+<form asp-controller="Customer" asp-action="Add">
+    <div asp-for="FirstName"></div>
+    <input type="text" name="FirstName" id="FirstName" />
+    <div asp-for="LastName"></div>
+    <input type="text" name="LastName" id="LastName" />
+    <button type="submit">Save</button>
+    <button type="button">Cancel</button>
+</form>

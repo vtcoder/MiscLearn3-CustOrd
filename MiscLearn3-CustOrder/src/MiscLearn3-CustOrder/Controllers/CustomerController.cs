@@ -31,5 +31,17 @@ namespace MiscLearn3_CustOrder.Controllers
 
             return View(customerViewModels);
         }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View("Add");
+        }
+
+        [HttpPost]
+        public IActionResult Add(CustomerViewModel customerViewModel)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
