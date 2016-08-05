@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MiscLearn3_CustOrder_BE
+namespace MiscLearn3_CustOrder.Models
 {
-    public class Customer
+    public class CustomerViewModel
     {
-        public Customer()
-        {
-        }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
