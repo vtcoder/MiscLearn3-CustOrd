@@ -16,6 +16,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiscLearn3-CustOrder-BE", "
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiscLearn3-CustOrder-BL", "src\MiscLearn3-CustOrder-BL\MiscLearn3-CustOrder-BL.xproj", "{67CEC911-AB3F-4868-AAD6-F09F10A1E130}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiscLearn3-CustOrder-DAL", "src\MiscLearn3-CustOrder-DAL\MiscLearn3-CustOrder-DAL.xproj", "{93A90943-A124-437D-BE5A-D9EA5173DB5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{67CEC911-AB3F-4868-AAD6-F09F10A1E130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67CEC911-AB3F-4868-AAD6-F09F10A1E130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67CEC911-AB3F-4868-AAD6-F09F10A1E130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A90943-A124-437D-BE5A-D9EA5173DB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A90943-A124-437D-BE5A-D9EA5173DB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A90943-A124-437D-BE5A-D9EA5173DB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A90943-A124-437D-BE5A-D9EA5173DB5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 		{ED9C395D-4113-4A8A-BF8D-C6BDB76FD2D7} = {52F13E27-4877-4F20-96B4-2C6C4D174317}
 		{D5B43D05-9017-451C-81D8-D839ED44D6C8} = {52F13E27-4877-4F20-96B4-2C6C4D174317}
 		{67CEC911-AB3F-4868-AAD6-F09F10A1E130} = {52F13E27-4877-4F20-96B4-2C6C4D174317}
+		{93A90943-A124-437D-BE5A-D9EA5173DB5B} = {52F13E27-4877-4F20-96B4-2C6C4D174317}
 	EndGlobalSection
 EndGlobal
