@@ -1,7 +1,9 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
+    "MiscLearn3-CustOrder-BE": "1.0.0-*",
+    "MiscLearn3-CustOrder-DAL": "1.0.0-*",
     "NETStandard.Library": "1.6.0"
   },
 
