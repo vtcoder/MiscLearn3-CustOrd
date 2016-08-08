@@ -22,5 +22,11 @@ namespace MiscLearn3_CustOrder_BL
             var customers = customerRepo.GetAllCustomers();
             return customers;
         }
+
+        public void Add(Customer customer)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            customerRepo.Add(customer);
+        }
     }
 }
