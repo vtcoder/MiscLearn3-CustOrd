@@ -68,5 +68,6 @@
     <Build Include="dbo\Tables\OrderExtensionField.sql" />
     <Build Include="dbo\Tables\CustomerExtensionField.sql" />
     <Build Include="dbo\Tables\Customer.sql" />
+    <Build Include="dbo\CustomersGetAll.sql" />
   </ItemGroup>
 </Project>

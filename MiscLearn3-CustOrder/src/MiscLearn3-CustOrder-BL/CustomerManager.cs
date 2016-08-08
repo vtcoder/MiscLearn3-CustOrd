@@ -9,13 +9,16 @@ namespace MiscLearn3_CustOrder_BL
 {
     public class CustomerManager
     {
-        public CustomerManager()
+        private string _connectionString;
+
+        public CustomerManager(string connectionString)
         {
+            _connectionString = connectionString;
         }
 
         public List<Customer> GetAllCustomers()
         {
-            CustomerRepository customerRepo = new CustomerRepository();
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
             var customers = customerRepo.GetAllCustomers();
             return customers;
         }

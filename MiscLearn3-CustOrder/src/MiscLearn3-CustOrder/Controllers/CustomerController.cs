@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MiscLearn3_CustOrder.Models;
 using MiscLearn3_CustOrder_BL;
+using Microsoft.Extensions.Options;
+using MiscLearn3_CustOrder.Models.Settings;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,10 +14,18 @@ namespace MiscLearn3_CustOrder.Controllers
 {
     public class CustomerController : Controller
     {
+        private MyAppSettings _appSettings;
+
+        public CustomerController(IOptions<MyAppSettings> appSettings)
+            : base()
+        {
+            _appSettings = appSettings.Value;
+        }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
-            CustomerManager customerManager = new CustomerManager();
+            CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
 
             var customers = customerManager.GetAllCustomers();
 
