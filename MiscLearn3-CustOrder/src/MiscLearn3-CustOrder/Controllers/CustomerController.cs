@@ -35,6 +35,7 @@ namespace MiscLearn3_CustOrder.Controllers
             {
                 customerViewModels.Add(new CustomerViewModel()
                 {
+                    Id = customer.Id,
                     FirstName = customer.FirstName,
                     LastName = customer.LastName
                 });
@@ -60,6 +61,42 @@ namespace MiscLearn3_CustOrder.Controllers
             customerManager.Add(customer);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int customerId)
+        {
+            CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
+            Customer customer = customerManager.GetCustomerById(customerId);
+
+            CustomerViewModel customerViewModel = new CustomerViewModel()
+            {
+                Id = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName
+            };
+
+            return View("Edit", customerViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CustomerViewModel customerViewModel)
+        {
+            Customer customer = new Customer();
+            customer.Id = customerViewModel.Id;
+            customer.FirstName = customerViewModel.FirstName;
+            customer.LastName = customerViewModel.LastName;
+
+            CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
+            customerManager.Edit(customer);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult CancelAddOrEdit()
+        {
+            return Index();
         }
     }
 }

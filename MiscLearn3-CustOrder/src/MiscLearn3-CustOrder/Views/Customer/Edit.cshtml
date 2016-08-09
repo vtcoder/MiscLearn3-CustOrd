@@ -1,0 +1,7 @@
+﻿@model CustomerViewModel
+
+<h2>Edit Customer</h2>
+
+<form asp-controller="Customer" asp-action="Edit">
+    @await Component.InvokeAsync("CustomerFormFields", new { customerViewModel = Model })
+</form>

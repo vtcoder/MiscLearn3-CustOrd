@@ -72,6 +72,8 @@
     <Build Include="dbo\Tables\Customer.sql" />
     <Build Include="dbo\StoredProcedures\CustomersGetAll.sql" />
     <Build Include="dbo\StoredProcedures\CustomerAdd.sql" />
+    <Build Include="dbo\StoredProcedures\CustomerEdit.sql" />
+    <Build Include="dbo\StoredProcedures\CustomerGetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchemaCompares\localhost-schema-compare.scmp" />

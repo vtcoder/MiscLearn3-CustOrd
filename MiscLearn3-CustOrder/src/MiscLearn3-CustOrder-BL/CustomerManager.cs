@@ -23,10 +23,23 @@ namespace MiscLearn3_CustOrder_BL
             return customers;
         }
 
+        public Customer GetCustomerById(int customerId)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            var customer = customerRepo.GetById(customerId);
+            return customer;
+        }
+
         public void Add(Customer customer)
         {
             CustomerRepository customerRepo = new CustomerRepository(_connectionString);
             customerRepo.Add(customer);
+        }
+
+        public void Edit(Customer customer)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            customerRepo.Edit(customer);
         }
     }
 }

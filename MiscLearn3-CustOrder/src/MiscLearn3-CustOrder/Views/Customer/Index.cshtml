@@ -2,11 +2,12 @@
 
 <h2>Customers</h2>
 
-@foreach(var customer in Model)
-{
-    <div>@customer.FirstName</div>
-    <div>@customer.LastName</div>
-    <p/>
-}
+<table>
+    @await Component.InvokeAsync("CustomerTableRow", new { customerViewModel = default(CustomerViewModel), isHeader = true })
+    @foreach (var customer in Model)
+    {
+        @await Component.InvokeAsync("CustomerTableRow", new { customerViewModel = customer })
+    }
+</table>
 
 @Html.ActionLink("Add", "Add", "Customer")

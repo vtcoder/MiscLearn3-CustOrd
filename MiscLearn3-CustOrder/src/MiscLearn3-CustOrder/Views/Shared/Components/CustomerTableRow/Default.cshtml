@@ -1,0 +1,20 @@
+﻿@model Tuple<CustomerViewModel, bool>
+
+@if (Model.Item2)
+{
+    <tr>
+        <th><label asp-for="Item1.FirstName"></label></th>
+        <th><label asp-for="Item1.LastName"></label></th>
+        <th></th>
+        <th></th>
+    </tr>
+}
+else
+{
+    <tr>
+        <td>@Model.Item1.FirstName</td>
+        <td>@Model.Item1.LastName</td>
+        <td><a asp-controller="Customer" asp-action="Edit" asp-route-customerId="@Model.Item1.Id">Edit</a></td>
+        <td><a asp-controller="Customer" asp-action="Delete" asp-route-customerId="@Model.Item1.Id">Delete</a></td>
+    </tr>
+}

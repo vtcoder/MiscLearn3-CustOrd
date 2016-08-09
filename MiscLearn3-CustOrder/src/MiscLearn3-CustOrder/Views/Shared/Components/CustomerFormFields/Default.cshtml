@@ -2,13 +2,14 @@
 
 <div>
     <label asp-for="FirstName"></label>
-    <input type="text" name="FirstName" id="FirstName" />
+    <input asp-for="FirstName" />
 </div>
 <div>
     <label asp-for="LastName"></label>
-    <input type="text" name="LastName" id="LastName" />
+    <input asp-for="LastName" />
 </div>
 <div>
     <button type="submit">Save</button>
-    <button type="button">Cancel</button>
+    <a asp-controller="Customer" asp-action="Index">Cancel</a>
 </div>
+<input type="hidden" asp-for="Id" />
