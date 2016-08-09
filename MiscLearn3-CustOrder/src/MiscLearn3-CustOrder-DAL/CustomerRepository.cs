@@ -14,6 +14,7 @@ namespace MiscLearn3_CustOrder_DAL
         private const string GET_BY_ID = "dbo.CustomersGetById";
         private const string ADD = "dbo.CustomerAdd";
         private const string EDIT = "dbo.CustomerEdit";
+        private const string DELETE = "dbo.CustomerDelete";
 
         private string _connectionString;
 
@@ -102,6 +103,18 @@ namespace MiscLearn3_CustOrder_DAL
                 {
                     throw new InvalidOperationException();
                 }
+            }
+        }
+
+        public void Delete(int customerID)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(DELETE, conn) { CommandType = CommandType.StoredProcedure })
+            {
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "CustomerId", Value = customerID });
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
     }

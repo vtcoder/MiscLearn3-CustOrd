@@ -41,5 +41,11 @@ namespace MiscLearn3_CustOrder_BL
             CustomerRepository customerRepo = new CustomerRepository(_connectionString);
             customerRepo.Edit(customer);
         }
+
+        public void Delete(int customerId)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            customerRepo.Delete(customerId);
+        }
     }
 }

@@ -93,10 +93,13 @@ namespace MiscLearn3_CustOrder.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IActionResult CancelAddOrEdit()
+        [HttpGet]
+        public IActionResult Delete(int customerId)
         {
-            return Index();
+            CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
+            customerManager.Delete(customerId);
+
+            return RedirectToAction("Index");
         }
     }
 }
