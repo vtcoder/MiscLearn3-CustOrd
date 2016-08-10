@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MiscLearn3_CustOrder.Controllers
 {
-    public class CustomerFieldAdminController : Controller
+    public class ExtensionFieldDefinitionAdminController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()

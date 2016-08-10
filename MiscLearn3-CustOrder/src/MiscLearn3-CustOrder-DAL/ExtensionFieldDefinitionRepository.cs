@@ -35,8 +35,8 @@ namespace MiscLearn3_CustOrder_DAL
                     ExtensionFieldDefinition extensionField = new ExtensionFieldDefinition();
                     extensionField.Id = Convert.ToInt32(reader[0]);
                     extensionField.Name = reader[1].ToString();
-                    extensionField.EntityType = Enum.Parse(typeof(EntityType),  reader[2].ToString();
-                    extensionField.DataType = reader[3].ToString();
+                    extensionField.EntityType = (EntityType)Enum.Parse(typeof(EntityType),  reader[2].ToString());
+                    extensionField.DataType = (ExtensionFieldDataType)Enum.Parse(typeof(ExtensionFieldDataType), reader[3].ToString());
                     extensionFields.Add(extensionField);
                 }
             }
