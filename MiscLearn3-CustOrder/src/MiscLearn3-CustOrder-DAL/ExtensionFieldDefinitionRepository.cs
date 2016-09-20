@@ -11,6 +11,7 @@ namespace MiscLearn3_CustOrder_DAL
     public class ExtensionFieldDefinitionRepository
     {
         private const string GET_ALL = "dbo.ExtensionFieldDefinitionsGetAll";
+        private const string ADD = "dbo.ExtensionFieldDefinitionAdd";
 
         private string _connectionString;
 
@@ -42,6 +43,24 @@ namespace MiscLearn3_CustOrder_DAL
             }
 
             return extensionFields;
+        }
+
+        public void Add(ExtensionFieldDefinition extensionFieldDefinition)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(ADD, conn) { CommandType = CommandType.StoredProcedure })
+            {
+                var idParam = new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output, ParameterName = "ExtensionFieldDefinitionId" };
+                cmd.Parameters.Add(idParam);
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, ParameterName = "Name", Value = extensionFieldDefinition.Name });
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "EntityType", Value = extensionFieldDefinition.EntityType });
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "DataType", Value = extensionFieldDefinition.DataType });
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                extensionFieldDefinition.Id = Convert.ToInt32(idParam.Value);
+            }
         }
     }
 }

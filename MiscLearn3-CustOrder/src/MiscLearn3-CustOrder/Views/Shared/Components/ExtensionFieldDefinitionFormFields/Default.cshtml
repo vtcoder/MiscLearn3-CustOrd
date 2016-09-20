@@ -1,0 +1,19 @@
+﻿@model CustomerViewModel
+
+<div>
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+</div>
+<div>
+    <label asp-for="EntityType"></label>
+    <input asp-for="EntityType" />
+</div>
+<div>
+    <label asp-for="DataType"></label>
+    <input asp-for="DataType" />
+</div>
+<div>
+    <button type="submit">Save</button>
+    <a asp-controller="ExtensionFieldDefinition" asp-action="Index">Cancel</a>
+</div>
+<input type="hidden" asp-for="Id" />

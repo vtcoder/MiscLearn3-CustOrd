@@ -1,0 +1,7 @@
+﻿@model ExtensionFieldDefinitionViewModel
+
+<h2>Edit Extension Field Definition</h2>
+
+<form asp-controller="ExtensionFieldDefinition" asp-action="Edit">
+    @await Component.InvokeAsync("ExtensionFieldDefinitionFormFields", new { extensionFieldDefinitionViewModel = Model })
+</form>

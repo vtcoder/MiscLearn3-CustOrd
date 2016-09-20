@@ -1,3 +1,13 @@
-﻿
+﻿@model List<ExtensionFieldDefinitionViewModel>
+
 <h2>Extension Field Definition Admin</h2>
 
+<table>
+    @await Component.InvokeAsync("ExtensionFieldDefinitionTableRow", new { extensionFieldDefinitionViewModel = default(ExtensionFieldDefinitionViewModel), isHeader = true })
+    @foreach (var extFldDef in Model)
+    {
+        @await Component.InvokeAsync("ExtensionFieldDefinitionTableRow", new { extensionFieldDefinitionViewModel = extFldDef })
+    }
+</table>
+
+@Html.ActionLink("Add", "Add", "ExtensionFieldDefinition")

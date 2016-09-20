@@ -23,5 +23,11 @@ namespace MiscLearn3_CustOrder_BL
             var extensionFields = extFldDefinitionRepo.GetAllExtensionFields();
             return extensionFields;
         }
+
+        public void Add(ExtensionFieldDefinition extensionFieldDefinition)
+        {
+            ExtensionFieldDefinitionRepository extFldDefinitionRepo = new ExtensionFieldDefinitionRepository(_connectionString);
+            extFldDefinitionRepo.Add(extensionFieldDefinition);
+        }
     }
 }
