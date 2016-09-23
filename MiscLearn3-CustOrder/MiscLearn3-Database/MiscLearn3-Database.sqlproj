@@ -77,6 +77,9 @@
     <Build Include="dbo\StoredProcedures\CustomerDelete.sql" />
     <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionsGetAll.sql" />
     <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionAdd.sql" />
+    <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionEdit.sql" />
+    <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionDelete.sql" />
+    <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionGetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchemaCompares\localhost-schema-compare.scmp" />

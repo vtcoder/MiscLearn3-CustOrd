@@ -63,5 +63,46 @@ namespace MiscLearn3_CustOrder.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Edit(int extensionFieldDefinitionId)
+        {
+            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            ExtensionFieldDefinition extensionFieldDefinition = extensionFieldManager.GetById(extensionFieldDefinitionId);
+
+            ExtensionFieldDefinitionViewModel extensionFieldDefinitionViewModel = new ExtensionFieldDefinitionViewModel()
+            {
+                Id = extensionFieldDefinition.Id,
+                Name = extensionFieldDefinition.Name,
+                DataType = extensionFieldDefinition.DataType,
+                EntityType = extensionFieldDefinition.EntityType
+            };
+
+            return View("Edit", extensionFieldDefinitionViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ExtensionFieldDefinitionViewModel extensionFieldDefinitionViewModel)
+        {
+            ExtensionFieldDefinition extensionFieldDefinition = new ExtensionFieldDefinition();
+            extensionFieldDefinition.Id = extensionFieldDefinitionViewModel.Id;
+            extensionFieldDefinition.Name = extensionFieldDefinitionViewModel.Name;
+            extensionFieldDefinition.EntityType = extensionFieldDefinitionViewModel.EntityType;
+            extensionFieldDefinition.DataType = extensionFieldDefinitionViewModel.DataType;
+
+            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            extensionFieldManager.Edit(extensionFieldDefinition);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int extensionFieldDefinitionId)
+        {
+            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            extensionFieldManager.Delete(extensionFieldDefinitionId);
+
+            return RedirectToAction("Index");
+        }
     }
 }

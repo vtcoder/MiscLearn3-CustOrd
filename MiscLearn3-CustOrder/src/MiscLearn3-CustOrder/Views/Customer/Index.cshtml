@@ -2,7 +2,7 @@
 
 <h2>Customers</h2>
 
-<table>
+<table class="table">
     @await Component.InvokeAsync("CustomerTableRow", new { customerViewModel = default(CustomerViewModel), isHeader = true })
     @foreach (var customer in Model)
     {
@@ -10,4 +10,4 @@
     }
 </table>
 
-@Html.ActionLink("Add", "Add", "Customer")
+<a class="btn btn-primary" asp-controller="Customer" asp-action="Add">Add</a>

@@ -2,7 +2,7 @@
 
 <h2>Extension Field Definition Admin</h2>
 
-<table>
+<table class="table">
     @await Component.InvokeAsync("ExtensionFieldDefinitionTableRow", new { extensionFieldDefinitionViewModel = default(ExtensionFieldDefinitionViewModel), isHeader = true })
     @foreach (var extFldDef in Model)
     {
@@ -10,4 +10,4 @@
     }
 </table>
 
-@Html.ActionLink("Add", "Add", "ExtensionFieldDefinition")
+<a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Add">Add</a>

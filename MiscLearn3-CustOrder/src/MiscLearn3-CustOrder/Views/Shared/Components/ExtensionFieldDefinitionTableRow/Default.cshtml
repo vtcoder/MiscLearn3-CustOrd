@@ -16,7 +16,7 @@ else
         <td>@Model.Item1.Name</td>
         <td>@Model.Item1.EntityType</td>
         <td>@Model.Item1.DataType</td>
-        <td><a asp-controller="ExtensionFieldDefinition" asp-action="Edit" asp-route-customerId="@Model.Item1.Id">Edit</a></td>
-        <td><a asp-controller="ExtensionFieldDefinition" asp-action="Delete" asp-route-customerId="@Model.Item1.Id">Delete</a></td>
+        <td><a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Edit" asp-route-extensionFieldDefinitionId="@Model.Item1.Id">Edit</a></td>
+        <td><a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Delete" asp-route-extensionFieldDefinitionId="@Model.Item1.Id">Delete</a></td>
     </tr>
 }
