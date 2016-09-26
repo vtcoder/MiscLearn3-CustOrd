@@ -19,31 +19,4 @@ namespace MiscLearn3_CustOrder.Models
         public int CustomerId { get; set; }
         public ExtensionFieldDefinitionViewModel Definition { get; set; }
     }
-
-    public static class Extensions
-    {
-        public static CustomerExtensionFieldViewModel ToViewModel(this CustomerExtensionField customerExtensionField)
-        {
-            CustomerExtensionFieldViewModel viewModel = new CustomerExtensionFieldViewModel();
-            viewModel.Id = customerExtensionField.Id;
-            viewModel.CustomerId = customerExtensionField.CustomerId;
-            viewModel.Value = customerExtensionField.Value;
-
-            //ExtensionFieldDefinitionViewModel extFldViewModel = new ExtensionFieldDefinitionViewModel();
-            viewModel.Definition.Id = customerExtensionField.Definition.Id;
-            viewModel.Definition.Name = customerExtensionField.Definition.Name;
-            viewModel.Definition.DataType = customerExtensionField.Definition.DataType;
-            viewModel.Definition.EntityType = customerExtensionField.Definition.EntityType;
-
-            return viewModel;
-        }
-
-        public static List<CustomerExtensionFieldViewModel> ToViewModel(this List<CustomerExtensionField> customerExtensionFields)
-        {
-            List<CustomerExtensionFieldViewModel> viewModels = new List<CustomerExtensionFieldViewModel>();
-            foreach (var custExtFld in customerExtensionFields)
-                viewModels.Add(custExtFld.ToViewModel());
-            return viewModels;
-        }
-    }
 }

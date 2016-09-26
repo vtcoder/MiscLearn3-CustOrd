@@ -3,5 +3,5 @@
 <h2>Add New Customer</h2>
 
 <form asp-controller="Customer" asp-action="Add">
-    @await Component.InvokeAsync("CustomerFormFields")
+    @await Component.InvokeAsync("CustomerFormFields", new { customerViewModel = Model })
 </form>

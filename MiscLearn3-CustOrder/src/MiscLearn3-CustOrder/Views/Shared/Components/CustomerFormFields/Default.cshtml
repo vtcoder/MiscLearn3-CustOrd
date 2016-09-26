@@ -8,6 +8,14 @@
     <label asp-for="LastName"></label>
     <input asp-for="LastName" />
 </div>
+@foreach (var custExtFld in Model.ExtensionFields)
+{
+    <div>
+        <label>@custExtFld.Definition.Name</label>
+        <input value="@custExtFld.Value" />
+    </div>
+}    
+
 <div>
     <button class="btn btn-primary" type="submit">Save</button>
     <a class="btn btn-primary" asp-controller="Customer" asp-action="Index">Cancel</a>

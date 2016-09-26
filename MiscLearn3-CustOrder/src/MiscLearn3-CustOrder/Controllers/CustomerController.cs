@@ -50,7 +50,19 @@ namespace MiscLearn3_CustOrder.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View("Add");
+            ExtensionFieldDefinitionManager extFldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
+            var extFldDefs = extFldManager.GetAllExtensionFieldDefinitions().Where(ef => ef.EntityType == EntityType.Customer).ToList();
+            var custExtFlds = extFldDefs.Select(efd => new CustomerExtensionFieldViewModel() { Id = -1, CustomerId = -1, Value = null, Definition = efd.ToViewModel() }).ToList();
+
+            CustomerViewModel customerViewModel = new CustomerViewModel()
+            {
+                Id = -1,
+                FirstName = string.Empty,
+                LastName = string.Empty,
+                ExtensionFields = custExtFlds
+            };
+
+            return View("Add", customerViewModel);
         }
 
         [HttpPost]
@@ -62,6 +74,8 @@ namespace MiscLearn3_CustOrder.Controllers
 
             CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
             customerManager.Add(customer);
+
+            //TODO add logic to save cust ext fld values for add new customer action
 
             return RedirectToAction("Index");
         }
