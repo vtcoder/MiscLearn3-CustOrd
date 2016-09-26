@@ -9,9 +9,9 @@ namespace MiscLearn3_CustOrder.Components.Customer
 {
     public class CustomerTableRowViewComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(CustomerViewModel customerViewModel, bool isHeader = false)
+        public async Task<IViewComponentResult> InvokeAsync(CustomerViewModel customerViewModel, bool isHeader = false, IEnumerable<ExtensionFieldDefinitionViewModel> extFldDefs = null)
         {
-            return View(new Tuple<CustomerViewModel, bool>(customerViewModel, isHeader));
+            return View(new Tuple<CustomerViewModel, bool, IEnumerable<ExtensionFieldDefinitionViewModel>>(customerViewModel, isHeader, extFldDefs));
         }
     }
 }

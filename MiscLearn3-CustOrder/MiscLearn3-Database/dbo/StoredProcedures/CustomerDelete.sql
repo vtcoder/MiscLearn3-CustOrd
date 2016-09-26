@@ -3,5 +3,5 @@
 AS 
 BEGIN
 	DELETE FROM dbo.Customer
-	WHERE CustomerId = @CustomerId;
+	WHERE CustomerID = @CustomerId;
 END

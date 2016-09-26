@@ -27,8 +27,10 @@ namespace MiscLearn3_CustOrder.Controllers
         public IActionResult Index()
         {
             CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
+            ExtensionFieldDefinitionManager extFldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
 
             var customers = customerManager.GetAllCustomers();
+            var customerExtFlds = customerManager.GetExtensionFieldsForAllCustomers();
 
             List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
             foreach (var customer in customers)
@@ -37,7 +39,8 @@ namespace MiscLearn3_CustOrder.Controllers
                 {
                     Id = customer.Id,
                     FirstName = customer.FirstName,
-                    LastName = customer.LastName
+                    LastName = customer.LastName,
+                    ExtensionFields = customerExtFlds.Where(cef => cef.CustomerId == customer.Id).OrderBy(cef => cef.Definition.Id).ToList().ToViewModel()
                 });
             }
 

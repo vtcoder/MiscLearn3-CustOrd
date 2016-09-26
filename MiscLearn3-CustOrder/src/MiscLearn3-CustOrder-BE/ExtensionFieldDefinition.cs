@@ -11,5 +11,6 @@ namespace MiscLearn3_CustOrder_BE
         public string Name { get; set; }
         public EntityType EntityType { get; set; }
         public ExtensionFieldDataType DataType { get; set; }
+        public string DefaultValue { get; set; }
     }
 }

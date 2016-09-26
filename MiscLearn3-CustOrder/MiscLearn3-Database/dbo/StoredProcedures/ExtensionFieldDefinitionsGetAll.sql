@@ -3,7 +3,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT efd.ExtensionFieldDefinitionID, efd.Name, efd.EntityType, efd.DataType
+	SELECT efd.ExtensionFieldDefinitionID, efd.Name, efd.EntityType, efd.DataType, efd.DefaultValue
 	FROM dbo.ExtensionFieldDefinition efd
 END
 

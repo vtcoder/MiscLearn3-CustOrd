@@ -26,7 +26,7 @@ namespace MiscLearn3_CustOrder_DAL
 
         public List<ExtensionFieldDefinition> GetAllExtensionFields()
         {
-            List<ExtensionFieldDefinition> extensionFields = new List<ExtensionFieldDefinition>();
+            List<ExtensionFieldDefinition> extensionFieldDefinitions = new List<ExtensionFieldDefinition>();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand cmd = new SqlCommand(GET_ALL, conn) { CommandType = CommandType.StoredProcedure })
@@ -36,16 +36,17 @@ namespace MiscLearn3_CustOrder_DAL
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    ExtensionFieldDefinition extensionField = new ExtensionFieldDefinition();
-                    extensionField.Id = Convert.ToInt32(reader[0]);
-                    extensionField.Name = reader[1].ToString();
-                    extensionField.EntityType = (EntityType)Enum.Parse(typeof(EntityType),  reader[2].ToString());
-                    extensionField.DataType = (ExtensionFieldDataType)Enum.Parse(typeof(ExtensionFieldDataType), reader[3].ToString());
-                    extensionFields.Add(extensionField);
+                    ExtensionFieldDefinition extensionFieldDefinition = new ExtensionFieldDefinition();
+                    extensionFieldDefinition.Id = Convert.ToInt32(reader[0]);
+                    extensionFieldDefinition.Name = reader[1].ToString();
+                    extensionFieldDefinition.EntityType = (EntityType)Enum.Parse(typeof(EntityType),  reader[2].ToString());
+                    extensionFieldDefinition.DataType = (ExtensionFieldDataType)Enum.Parse(typeof(ExtensionFieldDataType), reader[3].ToString());
+                    extensionFieldDefinition.DefaultValue = reader.IsDBNull(4) ? null : reader[4].ToString();
+                    extensionFieldDefinitions.Add(extensionFieldDefinition);
                 }
             }
 
-            return extensionFields;
+            return extensionFieldDefinitions;
         }
 
         public ExtensionFieldDefinition GetById(int extensionFieldDefinitionID)
@@ -66,6 +67,7 @@ namespace MiscLearn3_CustOrder_DAL
                     extensionFieldDefinition.Name = reader[1].ToString();
                     extensionFieldDefinition.EntityType = (EntityType)Enum.Parse(typeof(EntityType), reader[2].ToString());
                     extensionFieldDefinition.DataType = (ExtensionFieldDataType)Enum.Parse(typeof(ExtensionFieldDataType), reader[3].ToString());
+                    extensionFieldDefinition.DefaultValue = reader.IsDBNull(4) ? null : reader[4].ToString();
                 }
             }
 
@@ -82,6 +84,7 @@ namespace MiscLearn3_CustOrder_DAL
                 cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, ParameterName = "Name", Value = extensionFieldDefinition.Name });
                 cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "EntityType", Value = extensionFieldDefinition.EntityType });
                 cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "DataType", Value = extensionFieldDefinition.DataType });
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, ParameterName = "DefaultValue", Value = extensionFieldDefinition.DefaultValue });
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
@@ -99,6 +102,7 @@ namespace MiscLearn3_CustOrder_DAL
                 cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, ParameterName = "Name", Value = extensionFieldDefinition.Name });
                 cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "EntityType", Value = extensionFieldDefinition.EntityType });
                 cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "DataType", Value = extensionFieldDefinition.DataType });
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, ParameterName = "DefaultValue", Value = extensionFieldDefinition.DefaultValue });
 
                 conn.Open();
                 int recordsUpdated = cmd.ExecuteNonQuery();

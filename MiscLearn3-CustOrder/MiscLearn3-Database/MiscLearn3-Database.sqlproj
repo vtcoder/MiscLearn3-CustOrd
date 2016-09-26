@@ -80,6 +80,8 @@
     <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionEdit.sql" />
     <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionDelete.sql" />
     <Build Include="dbo\StoredProcedures\ExtensionFieldDefinitionGetById.sql" />
+    <Build Include="dbo\StoredProcedures\CustomerExtensionFieldGetByAllCustomers.sql" />
+    <Build Include="dbo\StoredProcedures\CustomerExtensionFieldAddForAllCustomers.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchemaCompares\localhost-schema-compare.scmp" />

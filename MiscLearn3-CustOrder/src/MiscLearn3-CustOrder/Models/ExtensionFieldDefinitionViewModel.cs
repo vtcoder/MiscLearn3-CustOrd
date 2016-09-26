@@ -15,7 +15,9 @@ namespace MiscLearn3_CustOrder.Models
         public string Name { get; set; }
         [Display(Name = "Entity Type")]
         public EntityType EntityType { get; set; }
-        [Display(Name = "DataType")]
+        [Display(Name = "Data Type")]
         public ExtensionFieldDataType DataType { get; set; }
+        [Display(Name = "Default Value")]
+        public string DefaultValue { get; set; }
     }
 }

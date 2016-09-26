@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 namespace MiscLearn3_CustOrder_BL
 {
 
-    public class ExtensionFieldManager
+    public class ExtensionFieldDefinitionManager
     {
         private string _connectionString;
 
-        public ExtensionFieldManager(string connectionString)
+        public ExtensionFieldDefinitionManager(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public List<ExtensionFieldDefinition> GetAllExtensionFields()
+        public List<ExtensionFieldDefinition> GetAllExtensionFieldDefinitions()
         {
             ExtensionFieldDefinitionRepository extFldDefinitionRepo = new ExtensionFieldDefinitionRepository(_connectionString);
             var extensionFields = extFldDefinitionRepo.GetAllExtensionFields();
@@ -35,6 +35,16 @@ namespace MiscLearn3_CustOrder_BL
         {
             ExtensionFieldDefinitionRepository extFldDefinitionRepo = new ExtensionFieldDefinitionRepository(_connectionString);
             extFldDefinitionRepo.Add(extensionFieldDefinition);
+            
+            if(extensionFieldDefinition.EntityType == EntityType.Customer)
+            {
+                CustomerManager customerManager = new CustomerManager(_connectionString);
+                customerManager.AddNewExtensionFieldDefinition(extensionFieldDefinition);
+            }
+            else if(extensionFieldDefinition.EntityType == EntityType.Order)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public void Edit(ExtensionFieldDefinition extensionFieldDefinition)

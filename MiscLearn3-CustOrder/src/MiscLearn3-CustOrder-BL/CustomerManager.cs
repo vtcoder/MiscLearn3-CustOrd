@@ -47,5 +47,18 @@ namespace MiscLearn3_CustOrder_BL
             CustomerRepository customerRepo = new CustomerRepository(_connectionString);
             customerRepo.Delete(customerId);
         }
+
+        public List<CustomerExtensionField> GetExtensionFieldsForAllCustomers()
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            var customerExtensionFields = customerRepo.GetExtensionFieldsForAllCustomers();
+            return customerExtensionFields;
+        }
+
+        public void AddNewExtensionFieldDefinition(ExtensionFieldDefinition extensionFieldDefinition)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            customerRepo.AddExtensionFieldDefinitionForAllCustomers(extensionFieldDefinition);
+        }
     }
 }

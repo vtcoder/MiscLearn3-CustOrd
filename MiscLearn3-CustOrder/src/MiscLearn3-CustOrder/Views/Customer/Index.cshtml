@@ -3,7 +3,13 @@
 <h2>Customers</h2>
 
 <table class="table">
-    @await Component.InvokeAsync("CustomerTableRow", new { customerViewModel = default(CustomerViewModel), isHeader = true })
+    @await Component.InvokeAsync("CustomerTableRow",
+        new
+        {
+            customerViewModel = default(CustomerViewModel),
+            isHeader = true,
+            extFldDefs = Model.First().ExtensionFields.Select(ef => ef.Definition)
+        })
     @foreach (var customer in Model)
     {
         @await Component.InvokeAsync("CustomerTableRow", new { customerViewModel = customer })

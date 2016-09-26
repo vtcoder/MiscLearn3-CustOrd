@@ -1,10 +1,16 @@
-﻿@model Tuple<CustomerViewModel, bool>
+﻿@model Tuple<CustomerViewModel, bool, IEnumerable<ExtensionFieldDefinitionViewModel>>
 
 @if (Model.Item2)
 {
     <tr>
         <th><label asp-for="Item1.FirstName"></label></th>
         <th><label asp-for="Item1.LastName"></label></th>
+        @foreach (var extFldDef in Model.Item3)
+        {
+            <th>
+                @extFldDef.Name
+            </th>
+        }
         <th></th>
         <th></th>
     </tr>
@@ -14,6 +20,12 @@ else
     <tr>
         <td>@Model.Item1.FirstName</td>
         <td>@Model.Item1.LastName</td>
+        @foreach (var extFld in Model.Item1.ExtensionFields)
+        {
+            <td>
+                @extFld.Value
+            </td>
+        }
         <td><a class="btn btn-primary" asp-controller="Customer" asp-action="Edit" asp-route-customerId="@Model.Item1.Id">Edit</a></td>
         <td><a class="btn btn-primary" asp-controller="Customer" asp-action="Delete" asp-route-customerId="@Model.Item1.Id">Delete</a></td>
     </tr>

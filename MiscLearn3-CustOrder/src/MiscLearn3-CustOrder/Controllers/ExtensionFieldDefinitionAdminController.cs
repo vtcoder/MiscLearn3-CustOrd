@@ -26,8 +26,8 @@ namespace MiscLearn3_CustOrder.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
-            var extensionFieldDefinitions = extensionFieldManager.GetAllExtensionFields();
+            ExtensionFieldDefinitionManager extensionFieldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
+            var extensionFieldDefinitions = extensionFieldManager.GetAllExtensionFieldDefinitions();
 
             List<ExtensionFieldDefinitionViewModel> extensionFieldDefinitionViewModels = new List<ExtensionFieldDefinitionViewModel>();
             foreach(var extFldDef in extensionFieldDefinitions)
@@ -37,7 +37,8 @@ namespace MiscLearn3_CustOrder.Controllers
                     Id = extFldDef.Id,
                     Name = extFldDef.Name,
                     EntityType = extFldDef.EntityType,
-                    DataType = extFldDef.DataType
+                    DataType = extFldDef.DataType,
+                    DefaultValue = extFldDef.DefaultValue
                 });
             }
 
@@ -57,8 +58,9 @@ namespace MiscLearn3_CustOrder.Controllers
             extensionFieldDefinition.Name = extensionFieldDefinitionViewModel.Name;
             extensionFieldDefinition.EntityType = extensionFieldDefinitionViewModel.EntityType;
             extensionFieldDefinition.DataType = extensionFieldDefinitionViewModel.DataType;
+            extensionFieldDefinition.DefaultValue = extensionFieldDefinitionViewModel.DefaultValue;
 
-            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            ExtensionFieldDefinitionManager extensionFieldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
             extensionFieldManager.Add(extensionFieldDefinition);
 
             return RedirectToAction("Index");
@@ -67,7 +69,7 @@ namespace MiscLearn3_CustOrder.Controllers
         [HttpGet]
         public IActionResult Edit(int extensionFieldDefinitionId)
         {
-            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            ExtensionFieldDefinitionManager extensionFieldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
             ExtensionFieldDefinition extensionFieldDefinition = extensionFieldManager.GetById(extensionFieldDefinitionId);
 
             ExtensionFieldDefinitionViewModel extensionFieldDefinitionViewModel = new ExtensionFieldDefinitionViewModel()
@@ -75,7 +77,8 @@ namespace MiscLearn3_CustOrder.Controllers
                 Id = extensionFieldDefinition.Id,
                 Name = extensionFieldDefinition.Name,
                 DataType = extensionFieldDefinition.DataType,
-                EntityType = extensionFieldDefinition.EntityType
+                EntityType = extensionFieldDefinition.EntityType,
+                DefaultValue = extensionFieldDefinition.DefaultValue
             };
 
             return View("Edit", extensionFieldDefinitionViewModel);
@@ -89,8 +92,9 @@ namespace MiscLearn3_CustOrder.Controllers
             extensionFieldDefinition.Name = extensionFieldDefinitionViewModel.Name;
             extensionFieldDefinition.EntityType = extensionFieldDefinitionViewModel.EntityType;
             extensionFieldDefinition.DataType = extensionFieldDefinitionViewModel.DataType;
+            extensionFieldDefinition.DefaultValue = extensionFieldDefinitionViewModel.DefaultValue;
 
-            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            ExtensionFieldDefinitionManager extensionFieldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
             extensionFieldManager.Edit(extensionFieldDefinition);
 
             return RedirectToAction("Index");
@@ -99,7 +103,7 @@ namespace MiscLearn3_CustOrder.Controllers
         [HttpGet]
         public IActionResult Delete(int extensionFieldDefinitionId)
         {
-            ExtensionFieldManager extensionFieldManager = new ExtensionFieldManager(_appSettings.DefaultConnection);
+            ExtensionFieldDefinitionManager extensionFieldManager = new ExtensionFieldDefinitionManager(_appSettings.DefaultConnection);
             extensionFieldManager.Delete(extensionFieldDefinitionId);
 
             return RedirectToAction("Index");

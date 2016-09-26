@@ -14,6 +14,10 @@
     <select asp-for="DataType" asp-items="Html.GetEnumSelectList<ExtensionFieldDataType>()"></select>
 </div>
 <div>
+    <label asp-for="DefaultValue"></label>
+    <input asp-for="DefaultValue" />
+</div>
+<div>
     <button class="btn btn-primary" type="submit">Save</button>
     <a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Index">Cancel</a>
 </div>
