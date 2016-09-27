@@ -107,14 +107,12 @@ namespace MiscLearn3_CustOrder.Controllers
         public IActionResult Edit(int customerId)
         {
             CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
-            Customer customer = customerManager.GetCustomerById(customerId);
 
-            CustomerViewModel customerViewModel = new CustomerViewModel()
-            {
-                Id = customer.Id,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName
-            };
+            Customer customer = customerManager.GetCustomerById(customerId);
+            CustomerViewModel customerViewModel = customer.ToViewModel();
+
+            var customerExtensionFields = customerManager.GetExtensionFieldsForCustomer(customer.Id);
+            customerViewModel.ExtensionFields = customerExtensionFields.ToViewModel();
 
             return View("Edit", customerViewModel);
         }
@@ -122,13 +120,37 @@ namespace MiscLearn3_CustOrder.Controllers
         [HttpPost]
         public IActionResult Edit(CustomerViewModel customerViewModel)
         {
-            Customer customer = new Customer();
-            customer.Id = customerViewModel.Id;
-            customer.FirstName = customerViewModel.FirstName;
-            customer.LastName = customerViewModel.LastName;
+            Customer customer = customerViewModel.ToEntity();
 
+            //Translate flattened-out form input fields into extension field objects.
+            foreach (var key in HttpContext.Request.Form.Keys)
+            {
+                if (key.StartsWith("efd_"))
+                {
+                    var val = HttpContext.Request.Form[key].FirstOrDefault();
+                    customerViewModel.ExtensionFields.Add(new CustomerExtensionFieldViewModel()
+                    {
+                        Id = -1,
+                        CustomerId = customer.Id,
+                        Value = val,
+                        Definition = new ExtensionFieldDefinitionViewModel()
+                        {
+                            Id = Convert.ToInt32(key.Remove(0, 4))
+                            //For now we only use the ID of the definition, this isn't ideal, so may be better to pass separate, or look it up to fill in, etc
+                            //just to avoid confusion.
+                        }
+                    });
+                }
+            }
+
+            //Edit customer.
             CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
             customerManager.Edit(customer);
+
+            //Edit extension fields.
+            var customerExtensionFields = customerViewModel.ExtensionFields.ToEntity();
+            foreach (var customerExtensionField in customerExtensionFields)
+                customerManager.EditCustomerExtensionField(customerExtensionField);
 
             return RedirectToAction("Index");
         }

@@ -83,6 +83,8 @@
     <Build Include="dbo\StoredProcedures\CustomerExtensionFieldGetByAllCustomers.sql" />
     <Build Include="dbo\StoredProcedures\CustomerExtensionFieldAddForAllCustomers.sql" />
     <Build Include="dbo\StoredProcedures\CustomerExtensionFieldAdd.sql" />
+    <Build Include="dbo\StoredProcedures\CustomerExtensionFieldEdit.sql" />
+    <Build Include="dbo\StoredProcedures\CustomerExtensionFieldAddForCustomer.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchemaCompares\localhost-schema-compare.scmp" />

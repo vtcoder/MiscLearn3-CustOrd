@@ -17,8 +17,10 @@ namespace MiscLearn3_CustOrder_DAL
         private const string DELETE = "dbo.CustomerDelete";
 
         private const string GET_CUST_EXT_FLD_BY_ALL_CUSTOMERS = "dbo.CustomerExtensionFieldGetByAllCustomers";
+        private const string GET_CUST_EXT_FLD_BY_CUSTOMER = "dbo.CustomerExtensionFieldGetByCustomer";
         private const string ADD_CUST_EXT_FLD_TO_ALL_CUSTOMERS = "dbo.CustomerExtensionFieldAddForAllCustomers";
         private const string ADD_CUST_EXT_FLD = "dbo.CustomerExtensionFieldAdd";
+        private const string EDIT_CUST_EXT_FLD = "dbo.CustomerExtensionFieldEdit";
 
         private string _connectionString;
 
@@ -151,6 +153,37 @@ namespace MiscLearn3_CustOrder_DAL
             return customerExtensionFields;
         }
 
+        public List<CustomerExtensionField> GetExtensionFieldsForCustomer(int customerId)
+        {
+            List<CustomerExtensionField> customerExtensionFields = new List<CustomerExtensionField>();
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(GET_CUST_EXT_FLD_BY_CUSTOMER, conn) { CommandType = CommandType.StoredProcedure })
+            {
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "CustomerId", Value = customerId });
+
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CustomerExtensionField customerExtensionField = new CustomerExtensionField();
+                    customerExtensionField.Id = Convert.ToInt32(reader[0]);
+                    customerExtensionField.CustomerId = Convert.ToInt32(reader[1]);
+                    customerExtensionField.Value = reader.IsDBNull(2) ? null : reader[2].ToString();
+
+                    customerExtensionField.Definition.Id = Convert.ToInt32(reader[3]);
+                    customerExtensionField.Definition.Name = reader[4].ToString();
+                    customerExtensionField.Definition.EntityType = (EntityType)Enum.Parse(typeof(EntityType), reader[5].ToString());
+                    customerExtensionField.Definition.DataType = (ExtensionFieldDataType)Enum.Parse(typeof(ExtensionFieldDataType), reader[6].ToString());
+
+                    customerExtensionFields.Add(customerExtensionField);
+                }
+            }
+
+            return customerExtensionFields;
+        }
+
         public void AddCustomerExtensionFieldForAllCustomers(ExtensionFieldDefinition extensionFieldDefinition)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -181,6 +214,20 @@ namespace MiscLearn3_CustOrder_DAL
                 cmd.ExecuteNonQuery();
 
                 customerExtensionField.Id = Convert.ToInt32(idParam.Value);
+            }
+        }
+
+        public void EditCustomerExtensionField(CustomerExtensionField customerExtensionField)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(EDIT_CUST_EXT_FLD, conn) { CommandType = CommandType.StoredProcedure })
+            {
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "CustomerId", Value = customerExtensionField.CustomerId });
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, ParameterName = "ExtensionFieldDefinitionId", Value = customerExtensionField.Definition.Id });
+                cmd.Parameters.Add(new SqlParameter() { SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, ParameterName = "Value", Value = customerExtensionField.Value });
+
+                conn.Open();
+                int recordsUpdated = cmd.ExecuteNonQuery();
             }
         }
     }

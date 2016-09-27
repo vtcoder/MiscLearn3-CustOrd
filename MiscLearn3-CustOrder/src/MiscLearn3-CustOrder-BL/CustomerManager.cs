@@ -55,6 +55,13 @@ namespace MiscLearn3_CustOrder_BL
             return customerExtensionFields;
         }
 
+        public List<CustomerExtensionField> GetExtensionFieldsForCustomer(int customerId)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            var customerExtensionFields = customerRepo.GetExtensionFieldsForCustomer(customerId);
+            return customerExtensionFields;
+        }
+
         public void AddCustomerExtensionFieldForAllCustomers(ExtensionFieldDefinition extensionFieldDefinition)
         {
             CustomerRepository customerRepo = new CustomerRepository(_connectionString);
@@ -65,6 +72,12 @@ namespace MiscLearn3_CustOrder_BL
         {
             CustomerRepository customerRepo = new CustomerRepository(_connectionString);
             customerRepo.AddCustomerExtensionField(customerExtensionField);
+        }
+
+        public void EditCustomerExtensionField(CustomerExtensionField customerExtensionField)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            customerRepo.EditCustomerExtensionField(customerExtensionField);
         }
     }
 }
