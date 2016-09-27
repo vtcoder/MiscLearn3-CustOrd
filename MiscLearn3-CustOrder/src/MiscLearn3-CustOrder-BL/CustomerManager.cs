@@ -55,10 +55,16 @@ namespace MiscLearn3_CustOrder_BL
             return customerExtensionFields;
         }
 
-        public void AddNewExtensionFieldDefinition(ExtensionFieldDefinition extensionFieldDefinition)
+        public void AddCustomerExtensionFieldForAllCustomers(ExtensionFieldDefinition extensionFieldDefinition)
         {
             CustomerRepository customerRepo = new CustomerRepository(_connectionString);
-            customerRepo.AddExtensionFieldDefinitionForAllCustomers(extensionFieldDefinition);
+            customerRepo.AddCustomerExtensionFieldForAllCustomers(extensionFieldDefinition);
+        }
+
+        public void AddCustomerExtensionField(CustomerExtensionField customerExtensionField)
+        {
+            CustomerRepository customerRepo = new CustomerRepository(_connectionString);
+            customerRepo.AddCustomerExtensionField(customerExtensionField);
         }
     }
 }

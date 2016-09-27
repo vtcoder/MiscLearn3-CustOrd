@@ -8,6 +8,48 @@ namespace MiscLearn3_CustOrder.Models
 {
     public static class ViewModelExtensions
     {
+        #region Customer Conversions
+
+        public static CustomerViewModel ToViewModel(this Customer customer)
+        {
+            CustomerViewModel customerViewModel = new CustomerViewModel();
+            customerViewModel.Id = customer.Id;
+            customerViewModel.FirstName = customer.FirstName;
+            customerViewModel.LastName = customer.LastName;
+
+            return customerViewModel;
+        }
+
+        public static List<CustomerViewModel> ToViewModel(this List<Customer> customers)
+        {
+            List<CustomerViewModel> viewModels = new List<CustomerViewModel>();
+            foreach (var cust in customers)
+                viewModels.Add(cust.ToViewModel());
+            return viewModels;
+        }
+
+        public static Customer ToEntity(this CustomerViewModel customerViewModel)
+        {
+            Customer customer = new Customer();
+            customer.Id = customerViewModel.Id;
+            customer.FirstName = customerViewModel.FirstName;
+            customer.LastName = customerViewModel.LastName;
+
+            return customer;
+        }
+
+        public static List<Customer> ToEntity(this List<CustomerViewModel> customerViewModels)
+        {
+            List<Customer> entities = new List<Customer>();
+            foreach (var custViewModel in customerViewModels)
+                entities.Add(custViewModel.ToEntity());
+            return entities;
+        }
+
+        #endregion
+
+        #region CustomerExtensionField Conversions
+
         public static CustomerExtensionFieldViewModel ToViewModel(this CustomerExtensionField customerExtensionField)
         {
             CustomerExtensionFieldViewModel viewModel = new CustomerExtensionFieldViewModel();
@@ -15,12 +57,8 @@ namespace MiscLearn3_CustOrder.Models
             viewModel.CustomerId = customerExtensionField.CustomerId;
             viewModel.Value = customerExtensionField.Value;
 
-            //ExtensionFieldDefinitionViewModel extFldViewModel = new ExtensionFieldDefinitionViewModel();
-            viewModel.Definition.Id = customerExtensionField.Definition.Id;
-            viewModel.Definition.Name = customerExtensionField.Definition.Name;
-            viewModel.Definition.DataType = customerExtensionField.Definition.DataType;
-            viewModel.Definition.EntityType = customerExtensionField.Definition.EntityType;
-
+            viewModel.Definition = customerExtensionField.Definition.ToViewModel();
+            
             return viewModel;
         }
 
@@ -31,6 +69,30 @@ namespace MiscLearn3_CustOrder.Models
                 viewModels.Add(custExtFld.ToViewModel());
             return viewModels;
         }
+
+        public static CustomerExtensionField ToEntity(this CustomerExtensionFieldViewModel customerExtensionFieldViewModel)
+        {
+            CustomerExtensionField customerExtensionField = new CustomerExtensionField();
+            customerExtensionField.Id = customerExtensionFieldViewModel.Id;
+            customerExtensionField.CustomerId = customerExtensionFieldViewModel.CustomerId;
+            customerExtensionField.Value = customerExtensionFieldViewModel.Value;
+
+            customerExtensionField.Definition = customerExtensionFieldViewModel.Definition.ToEntity();
+
+            return customerExtensionField;
+        }
+
+        public static List<CustomerExtensionField> ToEntity(this List<CustomerExtensionFieldViewModel> customerExtensionFieldViewModels)
+        {
+            List<CustomerExtensionField> entities = new List<CustomerExtensionField>();
+            foreach (var custExtFldViewModel in customerExtensionFieldViewModels)
+                entities.Add(custExtFldViewModel.ToEntity());
+            return entities;
+        }
+
+        #endregion
+
+        #region ExtensionFieldDefintion Conversions
 
         public static ExtensionFieldDefinitionViewModel ToViewModel(this ExtensionFieldDefinition extensionFieldDefinition)
         {
@@ -51,5 +113,27 @@ namespace MiscLearn3_CustOrder.Models
                 viewModels.Add(extensionFieldDefinition.ToViewModel());
             return viewModels;
         }
+
+        public static ExtensionFieldDefinition ToEntity(this ExtensionFieldDefinitionViewModel extensionFieldDefinitionViewModel)
+        {
+            ExtensionFieldDefinition extensionFieldDefinition = new ExtensionFieldDefinition();
+            extensionFieldDefinition.Id = extensionFieldDefinitionViewModel.Id;
+            extensionFieldDefinition.DataType = extensionFieldDefinitionViewModel.DataType;
+            extensionFieldDefinition.DefaultValue = extensionFieldDefinitionViewModel.DefaultValue;
+            extensionFieldDefinition.EntityType = extensionFieldDefinitionViewModel.EntityType;
+            extensionFieldDefinition.Name = extensionFieldDefinitionViewModel.Name;
+
+            return extensionFieldDefinition;
+        }
+
+        public static List<ExtensionFieldDefinition> ToEntity(this List<ExtensionFieldDefinitionViewModel> extensionFieldDefinitionViewModels)
+        {
+            List<ExtensionFieldDefinition> entities = new List<ExtensionFieldDefinition>();
+            foreach (var extensionFieldDefinitionViewModel in extensionFieldDefinitionViewModels)
+                entities.Add(extensionFieldDefinitionViewModel.ToEntity());
+            return entities;
+        }
+
+        #endregion
     }
 }

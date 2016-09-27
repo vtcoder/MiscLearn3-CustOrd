@@ -68,15 +68,38 @@ namespace MiscLearn3_CustOrder.Controllers
         [HttpPost]
         public IActionResult Add(CustomerViewModel customerViewModel)
         {
-            Customer customer = new Customer();
-            customer.FirstName = customerViewModel.FirstName;
-            customer.LastName = customerViewModel.LastName;
+            Customer customer = customerViewModel.ToEntity();
 
+            //Insert the customer.
             CustomerManager customerManager = new CustomerManager(_appSettings.DefaultConnection);
             customerManager.Add(customer);
 
-            //TODO add logic to save cust ext fld values for add new customer action
+            //Translate flattened-out form input fields into extension field objects.
+            foreach (var key in HttpContext.Request.Form.Keys)
+            {
+                if (key.StartsWith("efd_"))
+                {
+                    var val = HttpContext.Request.Form[key].FirstOrDefault();
+                    customerViewModel.ExtensionFields.Add(new CustomerExtensionFieldViewModel()
+                    {
+                        Id = -1,
+                        CustomerId = customer.Id,
+                        Value = val,
+                        Definition = new ExtensionFieldDefinitionViewModel()
+                        {                            
+                            Id = Convert.ToInt32(key.Remove(0, 4))
+                            //For now we only use the ID of the definition, this isn't ideal, so may be better to pass separate, or look it up to fill in, etc
+                            //just to avoid confusion.
+                        }
+                    });
+                }
+            }
 
+            //Insert the extension field values.
+            var customerExtensionFields = customerViewModel.ExtensionFields.ToEntity();
+            foreach (var customerExtensionField in customerExtensionFields)
+                customerManager.AddCustomerExtensionField(customerExtensionField);
+            
             return RedirectToAction("Index");
         }
 

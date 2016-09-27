@@ -39,7 +39,7 @@ namespace MiscLearn3_CustOrder_BL
             if(extensionFieldDefinition.EntityType == EntityType.Customer)
             {
                 CustomerManager customerManager = new CustomerManager(_connectionString);
-                customerManager.AddNewExtensionFieldDefinition(extensionFieldDefinition);
+                customerManager.AddCustomerExtensionFieldForAllCustomers(extensionFieldDefinition);
             }
             else if(extensionFieldDefinition.EntityType == EntityType.Order)
             {
