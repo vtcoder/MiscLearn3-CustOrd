@@ -1,0 +1,11 @@
+Things to learn/do:
+- Add SASS (via bower?)
+- Add font awesome via bower
+
+Proj level:
+- Do a partion table version instead of name/value tables
+- Other customization variations?
+- Target .net core only and deploy to linux VM
+- Look at overridable logic via roslyn
+- Look at overridable views (asp.net?, angular2?, combo of both?)
+- Look at using Jenkins for build
