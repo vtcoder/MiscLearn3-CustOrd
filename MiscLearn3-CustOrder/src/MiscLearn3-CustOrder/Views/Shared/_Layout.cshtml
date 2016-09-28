@@ -8,13 +8,19 @@
     <!--TODO add dev/prod env to use minified versions-->
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+
     <script src="~/js/main.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/jquery.js"></script>
 </head>
 <body>
     <div class="panel-body">
-        <h1 class="page-header">MiscLearn - 3 - CustOrder</h1>
-        <a asp-controller="Home" asp-action="index">Home</a>
+        <h1 class="page-header"><span class="fa fa-book fa-3x" style="margin-right: 12px;"></span>MiscLearn - 3 - CustOrder</h1>
+        <ul class="breadcrumb">
+            <li>
+                <a asp-controller="Home" asp-action="index" class="navbar-btn"><span class="fa fa-home" style="margin-right: 2px;"></span>Home</a>
+            </li>
+        </ul>
         <div>
             @RenderBody()
         </div>

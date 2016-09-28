@@ -1,6 +1,6 @@
 ﻿@model List<CustomerViewModel>
 
-<h2>Customers</h2>
+<h2><span class="fa fa-group" style="margin-right: 12px;"></span>Customers</h2>
 
 <table class="table">
     @await Component.InvokeAsync("CustomerTableRow",
@@ -16,4 +16,4 @@
     }
 </table>
 
-<a class="btn btn-primary" asp-controller="Customer" asp-action="Add">Add</a>
+<a class="btn btn-primary" asp-controller="Customer" asp-action="Add"><span class="fa fa-plus" style="margin-right: 4px;"></span>Add</a>

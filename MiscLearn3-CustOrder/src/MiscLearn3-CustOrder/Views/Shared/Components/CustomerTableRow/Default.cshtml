@@ -26,7 +26,7 @@ else
                 @extFld.Value
             </td>
         }
-        <td><a class="btn btn-primary" asp-controller="Customer" asp-action="Edit" asp-route-customerId="@Model.Item1.Id">Edit</a></td>
-        <td><a class="btn btn-primary" asp-controller="Customer" asp-action="Delete" asp-route-customerId="@Model.Item1.Id">Delete</a></td>
+        <td><a class="btn btn-primary" asp-controller="Customer" asp-action="Edit" asp-route-customerId="@Model.Item1.Id"><span class="fa fa-edit" style="margin-right: 4px;"></span>Edit</a></td>
+        <td><a class="btn btn-primary" asp-controller="Customer" asp-action="Delete" asp-route-customerId="@Model.Item1.Id"><span class="fa fa-remove" style="margin-right: 4px;"></span>Delete</a></td>
     </tr>
 }

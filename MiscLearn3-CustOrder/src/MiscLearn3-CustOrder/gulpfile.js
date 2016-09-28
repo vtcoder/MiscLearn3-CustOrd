@@ -32,5 +32,16 @@ gulp.task('_output-bower-jquery', function () {
     return filesStream;
 });
 
-gulp.task('output-bower-distribution-content', ['_output-bower-bootstrap', '_output-bower-jquery'], function () {
+gulp.task('_output-bower-font-awesome', function () {
+    console.log('*** Copying font awesome output files from bower components...');
+    var filesStream = gulp.src(
+        [
+            './bower_components/lib/font-awesome/css/**/*.*',   /*Include all css distribution files*/
+            './bower_components/lib/font-awesome/fonts/**/*.*'  /*Include all font distribution files*/
+        ], { base: 'bower_components/lib/font-awesome' });      /*Make gulp copy all folders under font-awesome directory instead of just files*/
+    filesStream.pipe(gulp.dest('./wwwroot/lib/font-awesome/'));
+    return filesStream;
+});
+
+gulp.task('output-bower-distribution-content', ['_output-bower-bootstrap', '_output-bower-jquery', '_output-bower-font-awesome'], function () {
 });

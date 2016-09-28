@@ -1,6 +1,6 @@
 ﻿@model List<ExtensionFieldDefinitionViewModel>
 
-<h2>Extension Field Definition Admin</h2>
+<h2><span class="fa fa-table fa-2x" style="margin-right: 12px;"></span>Extension Field Definition Admin</h2>
 
 <table class="table">
     @await Component.InvokeAsync("ExtensionFieldDefinitionTableRow", new { extensionFieldDefinitionViewModel = default(ExtensionFieldDefinitionViewModel), isHeader = true })
@@ -10,4 +10,4 @@
     }
 </table>
 
-<a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Add">Add</a>
+<a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Add"><span class="fa fa-plus" style="margin-right: 4px;"></span>Add</a>

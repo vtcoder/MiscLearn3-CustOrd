@@ -1,23 +1,25 @@
 ﻿@model CustomerViewModel
 
-<div>
-    <label asp-for="FirstName"></label>
-    <input asp-for="FirstName" />
-</div>
-<div>
-    <label asp-for="LastName"></label>
-    <input asp-for="LastName" />
-</div>
-@foreach (var custExtFld in Model.ExtensionFields)
-{
-    <div>
-        <label>@custExtFld.Definition.Name</label>
-        <input name="efd_@custExtFld.Definition.Id" value="@custExtFld.Value" />
+<div class="col-md-4">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
     </div>
-}    
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    @foreach (var custExtFld in Model.ExtensionFields)
+    {
+        <div class="form-group">
+            <label>@custExtFld.Definition.Name</label>
+            <input name="efd_@custExtFld.Definition.Id" value="@custExtFld.Value" class="form-control" />
+        </div>
+    }
 
-<div>
-    <button class="btn btn-primary" type="submit">Save</button>
-    <a class="btn btn-primary" asp-controller="Customer" asp-action="Index">Cancel</a>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit"><span class="fa fa-save" style="margin-right: 4px;"></span>Save</button>
+        <a class="btn btn-primary" asp-controller="Customer" asp-action="Index"><span class="fa fa-ban" style="margin-right: 4px;"></span>Cancel</a>
+    </div>
 </div>
 <input type="hidden" asp-for="Id" />

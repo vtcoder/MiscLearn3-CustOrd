@@ -1,7 +1,7 @@
 ﻿@model MiscLearn3_CustOrder.Models.HomeViewModel
 
-<h2>Homepage</h2>
+<h2><span class="fa fa-home fa-2x" style="margin-right: 12px;"></span>Homepage</h2>
 <h3>@Model.HomeTitle</h3>
 
-@Html.ActionLink("Customers", "Index", "Customer")
-@Html.ActionLink("Admin", "Index", "Admin")
+<a asp-controller="Admin" asp-action="Index" class="btn btn-sm btn-default">Administration</a>
+<a asp-controller="Customer" asp-action="Index" class="btn btn-sm btn-default">Customers</a>

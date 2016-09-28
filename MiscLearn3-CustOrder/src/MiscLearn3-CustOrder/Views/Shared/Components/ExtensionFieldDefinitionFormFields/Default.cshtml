@@ -1,24 +1,26 @@
 ﻿@model ExtensionFieldDefinitionViewModel
 @using MiscLearn3_CustOrder_BE
 
-<div>
-    <label asp-for="Name"></label>
-    <input asp-for="Name" />
-</div>
-<div>
-    <label asp-for="EntityType"></label>
-    <select asp-for="EntityType" asp-items="Html.GetEnumSelectList<EntityType>()"></select>
-</div>
-<div>
-    <label asp-for="DataType"></label>
-    <select asp-for="DataType" asp-items="Html.GetEnumSelectList<ExtensionFieldDataType>()"></select>
-</div>
-<div>
-    <label asp-for="DefaultValue"></label>
-    <input asp-for="DefaultValue" />
-</div>
-<div>
-    <button class="btn btn-primary" type="submit">Save</button>
-    <a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Index">Cancel</a>
+<div class="col-md-4">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EntityType"></label>
+        <select asp-for="EntityType" asp-items="Html.GetEnumSelectList<EntityType>()" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataType"></label>
+        <select asp-for="DataType" asp-items="Html.GetEnumSelectList<ExtensionFieldDataType>()" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DefaultValue"></label>
+        <input asp-for="DefaultValue" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit"><span class="fa fa-save" style="margin-right: 4px;"></span>Save</button>
+        <a class="btn btn-primary" asp-controller="ExtensionFieldDefinitionAdmin" asp-action="Index"><span class="fa fa-ban" style="margin-right: 4px;"></span>Cancel</a>
+    </div>
 </div>
 <input type="hidden" asp-for="Id" />

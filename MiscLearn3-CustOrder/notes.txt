@@ -1,6 +1,6 @@
 Things to learn/do:
+- DONE: Add font awesome via bower
 - Add SASS (via bower?)
-- Add font awesome via bower
 
 Proj level:
 - Do a partion table version instead of name/value tables
