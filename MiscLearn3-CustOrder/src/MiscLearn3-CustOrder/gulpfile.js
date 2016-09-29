@@ -1,15 +1,14 @@
-/// <binding AfterBuild='output-bower-distribution-content' />
+/// <binding AfterBuild='main-compile' />
 /*
 This file in the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 
 var gulp = require('gulp');
-
-gulp.task('default', function () {
-    // place code for your default task here
-});
-
+var gulpSass = require('gulp-sass');
+/*
+Gulp tasks to copy bower client-side package content to wwwroot.
+*/
 gulp.task('_output-bower-bootstrap', function () {
     console.log('*** Copying bootstrap output files from bower components...');
     var filesStream = gulp.src(
@@ -45,3 +44,21 @@ gulp.task('_output-bower-font-awesome', function () {
 
 gulp.task('output-bower-distribution-content', ['_output-bower-bootstrap', '_output-bower-jquery', '_output-bower-font-awesome'], function () {
 });
+
+/*
+Gulp tasks to compile SASS.
+*/
+
+gulp.task('compile-sass', function () {
+    console.log('*** Compiling SASS files to CSS...');
+    var fileStream = gulp.src('./wwwroot/css/main.scss');
+    fileStream = fileStream.pipe(gulpSass());
+    fileStream = fileStream.pipe(gulp.dest('./wwwroot/css/'));
+    return fileStream;
+});
+
+/*
+Main compile tasks. These should role up individual tasks to cover what should happen when the project is compiled.
+*/
+
+gulp.task('main-compile', ['output-bower-distribution-content', 'compile-sass'], function () { })
