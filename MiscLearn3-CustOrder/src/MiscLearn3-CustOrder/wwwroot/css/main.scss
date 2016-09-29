@@ -1,7 +1,22 @@
-﻿$main-font-family: Verdana;
+﻿ @import "../lib/bootstrap-sass/stylesheets/_bootstrap.scss";
+
+$main-font-family: Verdana;
 $main-font-color: darkred;
 
 body {
-  font-family: $main-font-family;
-  color: $main-font-color; 
+  font-family:  $main-font-family;
+  color:        $main-font-color; 
+}
+
+.ml-btn {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+.ml-btn-add {
+    @extend .ml-btn;
+}
+
+.ml-btn-add::after {
+    content: "this is a test";
 }

@@ -6,19 +6,31 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 
 var gulp = require('gulp');
 var gulpSass = require('gulp-sass');
+
 /*
 Gulp tasks to copy bower client-side package content to wwwroot.
 */
-gulp.task('_output-bower-bootstrap', function () {
-    console.log('*** Copying bootstrap output files from bower components...');
+
+gulp.task('_output-bower-bootstrap-sass', function () {
+    console.log('*** Copying bootstrap SASS output files from bower components...');
     var filesStream = gulp.src(
         [
-            './bower_components/lib/bootstrap/dist/**/*.*',     /*Include all distribution files*/
-            '!./bower_components/lib/bootstrap/dist/**/npm.js'  /*Exclude NPM script file*/
+            './bower_components/lib/bootstrap-sass/assets/**/*.*'     /*Include all distribution files*/
         ]);
-    filesStream.pipe(gulp.dest('./wwwroot/lib/bootstrap/'));
+    filesStream.pipe(gulp.dest('./wwwroot/lib/bootstrap-sass/'));
     return filesStream;
 });
+
+//gulp.task('_output-bower-bootstrap', function () {
+//    console.log('*** Copying bootstrap output files from bower components...');
+//    var filesStream = gulp.src(
+//        [
+//            './bower_components/lib/bootstrap/dist/**/*.*',     /*Include all distribution files*/
+//            '!./bower_components/lib/bootstrap/dist/**/npm.js'  /*Exclude NPM script file*/
+//        ]);
+//    filesStream.pipe(gulp.dest('./wwwroot/lib/bootstrap/'));
+//    return filesStream;
+//});
 
 gulp.task('_output-bower-jquery', function () {
     console.log('*** Copying jquery output files from bower components...');
@@ -42,7 +54,7 @@ gulp.task('_output-bower-font-awesome', function () {
     return filesStream;
 });
 
-gulp.task('output-bower-distribution-content', ['_output-bower-bootstrap', '_output-bower-jquery', '_output-bower-font-awesome'], function () {
+gulp.task('output-bower-distribution-content', ['_output-bower-bootstrap-sass', '_output-bower-jquery', '_output-bower-font-awesome'], function () {
 });
 
 /*
@@ -61,4 +73,4 @@ gulp.task('compile-sass', function () {
 Main compile tasks. These should role up individual tasks to cover what should happen when the project is compiled.
 */
 
-gulp.task('main-compile', ['output-bower-distribution-content', 'compile-sass'], function () { })
+gulp.task('main-compile', ['output-bower-distribution-content', 'compile-sass'], function () { });
